@@ -1,12 +1,24 @@
+import json
 import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gga%a7min21be0t@88@=1zjenkd*x^3y$47$8lt8htj!d8cm0rwkf'
 
+#Configurar la funcion para obtener el secret
+with open('../secret.json') as file:
+    secret = json.loads(file.read())
+def get_secret(secret_name, secrets=secret):
+    try:
+        return secrets[secret_name]
+    except:
+        msg = "Secret file wasn't found"
+        raise ImportError('Error en carga de secret')
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = get_secret('SECRET_KEY')
+ENCRYPT_KEY = b'G2MizlKR65CatILIi929HpbIKV-1OPotdxzdp5Z9GDs='
 
 # Application definition
 INSTALLED_APPS = [

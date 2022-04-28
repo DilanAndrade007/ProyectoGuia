@@ -1,0 +1,4 @@
+cryptography==37.0.0
+Django==4.0.3
+django-bootstrap-v5==1.0.11
+django-ckeditor==6.3.2
